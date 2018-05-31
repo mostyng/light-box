@@ -1,0 +1,332 @@
+<html>
+<head>
+
+<!--
+	DESIGNED BY MOSTYN G
+	CODED BY GLEB PRO
+-->
+	<meta charset="UTF-8">
+
+	<meta http-equiv="refresh" content="20">
+	
+
+
+ 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/p5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/addons/p5.dom.js"></script>
+	<script src="p5.speech.js"></script>
+	<script language="javascript" type="text/javascript" src="p5.sound.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+
+
+
+<script>
+
+
+
+	    var myRec = new p5.SpeechRec(); // new P5.SpeechRec object
+	    myRec.continuous = true; // do continuous recognition
+	    myRec.interimResults = true; // allow partial recognition (faster, less accurate)
+
+	    var mic
+
+	    function setup()
+	    {
+	    	myRec.onResult = showResult;
+	    	myRec.start(); // start engine
+
+	    	mic = new p5.AudioIn()
+	    	mic.start();
+
+
+	    }
+
+	    function showResult()
+	    {
+
+	    	document.getElementById('textbox').innerHTML += "<p>"+myRec.resultString+"</p>";
+	    	document.querySelector('#textbox > p:last-child').scrollIntoView();
+
+
+
+	    	// FOR AUDIO AND PREVIOUS METHOD
+	    	// if(myRec.resultValue == true){
+	    	// 		console.log(myRec.resultValue);
+
+		    // 		console.log(myRec.resultString);
+		    // 		console.log(myRec.resultConfidence);
+
+		    // 		// var styleString = "font-size:"+Math.min(mic.getLevel()*2000, 100)+"px;"
+
+		    // 		// var stretchString = "transform:"+"scaleX("+Math.min(mic.getLevel()*30, 10)+");"
+
+		    // 		// var stretchXY = "transform:"+"scale("+Math.min(mic.getLevel()*100, 40)+","+Math.min(mic.getLevel()*15, 10)+");"
+
+		    // 		// var stretchPot = "width:"+ Math.min(mic.getLevel()*2000, 200)+"px;"
+
+		    // 		// document.getElementById('textbox').innerHTML += "<p style="+styleString+">"+myRec.resultString+"</p>";
+
+		    // 		document.getElementById('textbox').innerHTML += "<p>"+myRec.resultString+"</p>";
+
+		    // 		// document.getElementById('textbox').innerHTML += "<p style="+stretchString+">"+myRec.resultString+"</p>";
+
+		    // 		// document.getElementById('textbox').innerHTML += "<p style="+stretchPot+">" + myRec.resultString + "<img src=\'port.svg\'>" +"</p>";
+
+
+		    // 		document.querySelector('#textbox > p:last-child').scrollIntoView();
+	    	// }
+
+	    }
+
+</script>
+
+
+
+
+
+
+	<style type="text/css">
+
+	@font-face{
+		font-family: Arial Narrow;
+		src: url(Arial_Narrow_Bold.ttf);
+	}
+
+	@font-face{
+		font-family: Times Condensed;
+		src: url(TimesNewRomanMTStd-BoldCond.otf);
+	}
+
+		html{
+			margin: 0;
+			padding: 0;
+			transform: scaleX(auto);
+		}
+
+		body{
+			color: blue;
+			padding: 0;
+			margin: 0;
+			overflow-x: hidden;
+			overflow-y: scroll;
+		}
+		p{
+			text-align: center;
+			font-family: Arial Narrow;
+			display: inline-block;
+			text-transform: uppercase;
+			line-height: 0.95;
+			height: auto;
+			margin: 0 auto;
+			transform-origin: 0,0;
+			width: 100vw;
+			letter-spacing: -0.3vw;
+
+		}
+
+		h1{
+			font-size: 24pt;
+		}
+
+
+		#pot{
+			z-index: -2;
+		  position: fixed;
+		  top: 0px;
+		  left: 0px
+		}
+		canvas{
+			z-index: -2;
+
+		  position: fixed;
+		  width: 100vw;
+		  height: 100vh;
+		}
+
+		#defaultCanvas{
+/*			display: none;*/
+		z-index: -2;
+		width: 100vw;
+		height: 100vh;
+
+		}
+
+
+		#number{
+			font-family: Arial Narrow;
+
+			position: relative;
+			width: 45vw;
+
+			z-index: 2;
+			bottom: 0;
+			left: 0;
+			padding-left: 5%;
+			padding-bottom: 2%;
+			text-align: left;
+		}
+
+		#me{
+			font-family: Arial Narrow;
+
+			position: relative;
+
+			z-index: 2;
+
+			width: 45vw;
+			right: 0;
+			bottom: 0;
+			padding-right: 5%;
+			padding-bottom: 2%;
+			text-align: right;
+		}
+		#marq{
+			position: relative;
+		}
+
+		#textbox{
+			height: auto;
+			position: absolute;
+			top: 0;
+			font-size: 9.2vw;
+			z-index: 1;
+		}
+
+	
+
+		.bottom{
+
+			display: inline-flex;
+
+			font-size: 9.2vw;
+			position: fixed;
+			right: 0;
+			bottom: 0;
+
+			background-color: white;
+			color: red;
+			width: 100vw;
+			z-index: 10;
+
+		
+/*			-moz-transform: scaleX(-1);
+			-webkit-transform: scaleX(-1);
+			-o-transform: scaleX(-1);
+			transform: scaleX(-1);*/
+		}
+
+		.container{
+			width: 100vw;
+			height: 75vh;
+/*			background-color: yellow;
+*/			margin: 0 auto;
+			padding: 0;
+			position: absolute;
+			top: 0;
+			left: 0;
+
+/*			-moz-transform: scaleX(-1);
+			-webkit-transform: scaleX(-1);
+			-o-transform: scaleX(-1);
+			transform: scaleX(-1);*/
+		}
+
+
+/*		p:nth-child(3n+0){
+			font-family: Times Condensed;
+			font-size: 1.1em;
+		}*/
+
+		img{
+			display: inline-block;
+/*			transform-origin: 0,0;*/
+			height: 6.3vw;
+			width: auto;
+		}
+		video{
+			width: 500px;
+			height: auto;
+		}
+
+
+		#maindiv{
+		  overflow: hidden;
+		  white-space: nowrap;
+
+		  font-family: Times Condensed;
+		  text-transform: uppercase;
+
+		  z-index: 2;
+		  bottom: 0;
+		  margin-bottom: -1.4%;
+		  letter-spacing: -0.2vw;
+		  text-align: left;
+		  font-size: 9.4vw;
+
+		}
+
+		#div1 {
+		  display: inline-block;
+		  animation: marquee 10s linear infinite;
+		}
+
+		#div2 {
+		  display: inline-block;
+		  animation: marquee2 10s linear infinite;
+		  animation-delay: 5s;
+		}
+
+		@keyframes marquee {
+		  from {
+		    transform: translateX(100%);
+		  }
+		  to {
+		    transform: translateX(-100%);
+		  }
+		}
+
+		@keyframes marquee2 {
+		  from {
+		    transform: translateX(0%);
+		  }
+		  to {
+		    transform: translateX(-200%);
+		  }
+		}
+	</style>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<p id="textbox"></p>
+	</div>
+	
+	<div class="bottom">
+<!-- 		<p id="number">650-391-4089</p>
+		<p id="me">24/7 A WEEK</p>
+ -->		
+
+<!--  	Source of Marquee Tutorial http://jsfiddle.net/FWWEn/ & https://stackoverflow.com/questions/10547797/very-simple-very-smooth-javascript-marquee
+ -->
+		<div id="maindiv">
+		  <div id="div1">
+		    &nbsp; <img src="port.svg"> Speak Quickly <img src="port.svg"> Sound Urgent <img src="port.svg"> Say it Louder <img src="port.svg"> State it with Purpose 
+		  </div>
+		  <div id="div2">
+		    &nbsp; <img src="port.svg"> Speak Quickly <img src="port.svg"> Sound Urgent <img src="port.svg"> Say it Louder <img src="port.svg"> State it with Purpose 
+		  </div>
+		</div>
+
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+	<script type="text/javascript">
+		$('#maindiv').width($('#div1').width());
+	</script>
+
+</body>
+</html>
